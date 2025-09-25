@@ -1,21 +1,27 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { BarChart3, PieChart, TrendingUp, Table } from "lucide-react";
+import { BarChart3, PieChart, TrendingUp, Table, Sparkles } from "lucide-react";
 
 const DataVisualization = ({ selectedChart }) => {
   const renderChart = () => {
     if (!selectedChart) {
       return (
-        <div className="flex flex-col items-center justify-center h-64 text-center space-y-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full flex items-center justify-center">
-            <BarChart3 className="h-8 w-8 text-white" />
+        <div className="flex flex-col items-center justify-center h-full text-center space-y-4 p-6">
+          <div className="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full flex items-center justify-center relative">
+            <BarChart3 className="h-10 w-10 text-white" />
+            <div className="absolute -top-2 -right-2">
+              <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
+            </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-cyan-300 mb-2">No Chart Selected</h3>
-            <p className="text-gray-400 text-sm max-w-xs">
-              Ask the AI assistant a question to generate interactive visualizations of groundwater data.
+            <h3 className="text-xl font-semibold text-cyan-300 mb-2">AI Charts Ready</h3>
+            <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
+              Ask the AI assistant about groundwater data to generate beautiful, interactive visualizations automatically.
             </p>
+          </div>
+          <div className="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">
+            Try: "Show me critical areas" or "Analyze water trends"
           </div>
         </div>
       );
