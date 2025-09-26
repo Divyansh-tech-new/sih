@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ChatInterface from "./ChatInterface";
-import DataVisualization from "./DataVisualization";
 import MapView from "./MapView";
 import StatsModal from "./StatsModal";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
