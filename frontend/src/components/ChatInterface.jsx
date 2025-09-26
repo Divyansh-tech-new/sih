@@ -279,9 +279,12 @@ const ChatInterface = () => {
                             </div>
                             
                             {message.chartData && (
-                              <Badge variant="secondary" className="bg-blue-600/30 text-blue-200 border-blue-400/30">
-                                📊 Chart Generated: {message.chartData.chartType}
-                              </Badge>
+                              <div className="mt-3">
+                                <Badge variant="secondary" className="bg-blue-600/30 text-blue-200 border-blue-400/30 mb-3">
+                                  📊 Generated {message.chartData.chartType} chart
+                                </Badge>
+                                {renderEmbeddedChart(message.chartData)}
+                              </div>
                             )}
 
                             {message.detailed && (
