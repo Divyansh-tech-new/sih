@@ -5,10 +5,10 @@ import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
-import { Send, Bot, User, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { Send, Bot, User, ChevronDown, ChevronUp, Loader2, BarChart3, PieChart, TrendingUp, Table } from "lucide-react";
 import { getMockResponse } from "../mock";
 
-const ChatInterface = ({ onChartGenerated }) => {
+const ChatInterface = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
