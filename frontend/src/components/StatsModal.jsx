@@ -42,7 +42,7 @@ const StatsModal = () => {
               <TrendingUp className="h-8 w-8 text-green-400/50" />
             </div>
           </CardContent>
-        </div>
+        </Card>
 
         <Card className="bg-white/5 border-white/10">
           <CardContent className="p-4">
