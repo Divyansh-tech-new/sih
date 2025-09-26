@@ -66,16 +66,11 @@ const MainApp = () => {
         </div>
       </header>
 
-      {/* Main Layout - Chat Focused */}
-      <div className="flex h-[calc(100vh-5rem)] relative">
-        {/* Main Chat Interface - Takes most space */}
-        <div className="flex-1 max-w-4xl mx-auto p-4">
-          <ChatInterface onChartGenerated={setSelectedChart} />
-        </div>
-
-        {/* Right Sidebar - Smaller */}
-        <div className="w-80 border-l border-white/10 p-4">
-          <DataVisualization selectedChart={selectedChart} />
+      {/* Main Layout - Full Width Chat */}
+      <div className="h-[calc(100vh-5rem)] p-4">
+        {/* Full Width Chat Interface */}
+        <div className="max-w-6xl mx-auto h-full">
+          <ChatInterface />
         </div>
       </div>
 
