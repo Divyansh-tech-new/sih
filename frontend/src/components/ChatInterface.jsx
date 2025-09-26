@@ -74,6 +74,152 @@ const ChatInterface = () => {
     setExpandedMessage(expandedMessage === messageId ? null : messageId);
   };
 
+  const renderEmbeddedChart = (chartData) => {
+    if (!chartData) return null;
+
+    const { chartType, dataSeries } = chartData;
+
+    if (chartType === "pie") {
+      return (
+        <Card className="mt-4 bg-white/5 border-white/10">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-sm text-cyan-300">
+              <PieChart className="h-4 w-4" />
+              Status Distribution
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex justify-center">
+              <div className="relative w-32 h-32">
+                <div className="absolute inset-0 rounded-full border-8 border-green-400" 
+                     style={{ 
+                       borderRightColor: '#F59E0B', 
+                       borderBottomColor: '#EF4444',
+                       borderLeftColor: '#EA580C',
+                       transform: 'rotate(45deg)'
+                     }}>
+                </div>
+                <div className="absolute inset-2 bg-slate-800 rounded-full flex items-center justify-center">
+                  <div className="text-center">
+                    <PieChart className="h-4 w-4 text-cyan-400 mx-auto mb-1" />
+                    <p className="text-xs text-gray-400">Distribution</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {dataSeries.map((item, index) => (
+                <div key={index} className="flex items-center gap-2 p-2 bg-white/5 rounded text-xs">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
+                  <span>{item.label}: {item.value}%</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (chartType === "bar") {
+      return (
+        <Card className="mt-4 bg-white/5 border-white/10">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-sm text-cyan-300">
+              <BarChart3 className="h-4 w-4" />
+              Critical Blocks by State
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-32 flex items-end justify-around p-3 bg-white/5 rounded">
+              {dataSeries.map((item, index) => (
+                <div key={index} className="flex flex-col items-center gap-2">
+                  <div 
+                    className="bg-gradient-to-t from-cyan-600 to-cyan-400 rounded-t w-8 transition-all duration-500"
+                    style={{ height: `${(item.y / Math.max(...dataSeries.map(d => d.y))) * 80}px` }}
+                  ></div>
+                  <span className="text-xs text-center text-gray-300">{item.x}</span>
+                  <Badge variant="secondary" className="text-xs h-4">{item.y}</Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (chartType === "line") {
+      return (
+        <Card className="mt-4 bg-white/5 border-white/10">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-sm text-cyan-300">
+              <TrendingUp className="h-4 w-4" />
+              Seasonal Water Level Trends
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-24 bg-white/5 rounded p-3 relative">
+              <svg className="w-full h-full">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#06B6D4" />
+                    <stop offset="100%" stopColor="#3B82F6" />
+                  </linearGradient>
+                </defs>
+                <polyline
+                  points="20,60 120,30"
+                  fill="none"
+                  stroke="url(#lineGradient)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <circle cx="20" cy="60" r="3" fill="#06B6D4" />
+                <circle cx="120" cy="30" r="3" fill="#3B82F6" />
+              </svg>
+              <div className="absolute bottom-1 left-3 text-xs text-gray-400">Pre-Monsoon</div>
+              <div className="absolute bottom-1 right-3 text-xs text-gray-400">Post-Monsoon</div>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (chartType === "table") {
+      return (
+        <Card className="mt-4 bg-white/5 border-white/10">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-sm text-cyan-300">
+              <Table className="h-4 w-4" />
+              Groundwater Data Sample
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-white/5 rounded overflow-hidden">
+              <div className="grid grid-cols-3 gap-1 p-2 bg-white/10 text-xs font-medium">
+                <div>Block</div>
+                <div>Status</div>
+                <div>Quality Index</div>
+              </div>
+              {dataSeries.slice(0, 3).map((row, index) => (
+                <div key={index} className="grid grid-cols-3 gap-1 p-2 text-xs border-t border-white/10">
+                  <div className="truncate">{row.block}</div>
+                  <Badge 
+                    variant={row.status === "Critical" ? "destructive" : row.status === "Safe" ? "default" : "secondary"}
+                    className="text-xs h-4"
+                  >
+                    {row.status}
+                  </Badge>
+                  <div>{row.qualityIndex}</div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    return null;
+  };
+
   const quickQuestions = [
     "Analyze groundwater trends in Karnataka",
     "Show critical areas in Rajasthan", 
