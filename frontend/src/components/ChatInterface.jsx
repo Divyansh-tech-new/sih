@@ -60,11 +60,6 @@ const ChatInterface = () => {
 
       setMessages(prev => [...prev, aiMessage]);
       setIsTyping(false);
-
-      // Send chart data to parent component
-      if (response.chartData) {
-        onChartGenerated(response.chartData);
-      }
     }, 2000);
   };
 
