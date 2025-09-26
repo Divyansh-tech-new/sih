@@ -9,7 +9,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Droplets, BarChart3, Map, Settings, TrendingUp, Activity } from "lucide-react";
 
 const MainApp = () => {
-  const [selectedChart, setSelectedChart] = useState(null);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
 
